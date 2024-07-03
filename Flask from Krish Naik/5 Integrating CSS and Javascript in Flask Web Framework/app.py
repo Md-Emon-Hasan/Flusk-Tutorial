@@ -1,7 +1,17 @@
-# intrigrate HTML with flask
-# HTTP ver GET and POST
+### Integrate HTML With Flask
+### HTTP verb GET And POST
 
-from flask import Flask,redirect,url_for,render_template,request
+##Jinja2 template engine
+'''
+{%...%} conditions,for loops
+{{    }} expressions to print output
+{#....#} this is for comments
+'''
+from flask import Flask
+from flask import redirect
+from flask import url_for
+from flask import render_template
+from flask import request
 
 app=Flask(__name__)
 
@@ -16,7 +26,9 @@ def success(score):
         res="PASS"
     else:
         res='FAIL'
-    return render_template('result.html',result=res)
+    exp={'score':score,'res':res}
+    return render_template('result.html',result=exp)
+
 
 @app.route('/fail/<int:score>')
 def fail(score):

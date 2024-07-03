@@ -8,16 +8,13 @@
 {#....#} this is for comments
 '''
 
-from flask import Flask,redirect,url_for
+from flask import Flask
+from flask import redirect
+from flask import url_for
+from flask import render_template
+from flask import request
 
-app=Flask(__name__)
-
-# intrigrate HTML with flask
-# HTTP ver GET and POST
-
-from flask import Flask,redirect,url_for,render_template,request
-
-app=Flask(__name__)
+app = Flask(__name__)
 
 @app.route('/')
 def welcome():
@@ -25,9 +22,9 @@ def welcome():
 
 @app.route('/success/<int:score>')
 def success(score):
-    res=""
+    res = ''
     if score>=50:
-        res="PASS"
+        res='PASS'
     else:
         res='FAIL'
     exp={'score':score,'res':res}
@@ -35,11 +32,11 @@ def success(score):
 
 @app.route('/fail/<int:score>')
 def fail(score):
-    return "The Person has failed and the marks is "+ str(score)
+    return 'The person has failed and the marks is '+str(score)
 
-### Result checker
+# result checker
 @app.route('/results/<int:marks>')
-def results(marks):
+def resutls(marks):
     result=""
     if marks<50:
         result='fail'
@@ -47,9 +44,9 @@ def results(marks):
         result='success'
     return redirect(url_for(result,score=marks))
 
-### Result checker submit html page
+# Result checker submit html page
 @app.route('/submit',methods=['POST','GET'])
-def submit():
+def sumit():
     total_score=0
     if request.method=='POST':
         science=float(request.form['science'])
@@ -57,8 +54,9 @@ def submit():
         c=float(request.form['c'])
         data_science=float(request.form['datascience'])
         total_score=(science+maths+c+data_science)/4
-    res=""
+    res=''
     return redirect(url_for('success',score=total_score))
 
 if __name__=='__main__':
     app.run(debug=True)
+    

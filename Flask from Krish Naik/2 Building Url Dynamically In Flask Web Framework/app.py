@@ -1,5 +1,5 @@
-# building url dynamically
-# variables rules and url building
+### Building Url dynamically
+### variable rlues and url building
 
 from flask import Flask
 
@@ -11,7 +11,7 @@ def welcome():
 
 @app.route('/sucess/<int:score>')
 def sucess(score):
-    return 'This person has passed and the marks is '+str(score)
+    return 'This preson has passed and the marks is '+str(score)
 
 @app.route('/fail/<int:score>')
 def fail(score):
@@ -19,13 +19,12 @@ def fail(score):
 
 # result checker
 @app.route('/results/<int:score>')
-def resutls(score):
-    result=''
+def results(score):
     if score<50:
-        result='fail'
+        results='fail'
     else:
-        result='sucess'
-    return result
+        results='sucess'
+    return results
 
 if __name__=='__main__':
     app.run(debug=True)
